@@ -15,6 +15,12 @@
 .btn-primary {
   background: #1B295E;
 }
+.btn-primary:active {
+  opacity: 0.5;
+  color: #ddd;
+  transition: transform 0.1s;
+  transform: scale(0.9)
+}
 
 .score-container {
   margin-right: auto;
@@ -141,6 +147,15 @@ input{
   }
 }
 
+.action-row{
+  justify-content:space-between;
+  margin-top:0.7em
+}
+
+.gameStarted-btn{
+  margin-top: 0em;
+}
+
 .action-row + .action-row {
   margin-top: 1em;
 }
@@ -236,10 +251,12 @@ input{
   background-image: url(../assets/token.svg);
 }
 .level-text {
+  display:flex;
   font-weight: bold;
 }
+
 .logo {
-  align-self: flex-start;
+  align-self: center;
 }
 .link {
   font-size: 0.8em;
@@ -338,7 +355,9 @@ input{
           class="logo"
           target="_blank"
         ></a>
+
         <div class="score-container" :style="{ width: boardSizePx + 'px' }">
+
           <div class="balance info-item" :style="infoItemStyle">
             <div class="label">
               <div class="icon-token" :style="iconTokenStyle"></div>
@@ -350,6 +369,9 @@ input{
               </transition>
             </div>
           </div>
+            <volume-icon               
+              :board-size-px="boardSizePx"
+            > </volume-icon>
           <div class="count-down info-item" :style="infoItemStyle">
             <div class="label">
               <div class="icon-clock" :style="iconClockStyle"></div>
@@ -458,15 +480,29 @@ input{
           :gameEnded="gameEnded"
         ></stake-row>
 
+
+
         <footer class="flex-vertical" :style="{ width: boardSizePx + 'px' }" v-if="gameStarted">
           <div class="flex-horizontal action-row">
+            <button 
+              class="btn-primary gameStarted-btn" 
+              :style="{
+                visibility: gameEnded ? 'hidden':'visible',
+                fontSize: boardSizePx / 20 + 'px'
+              }"
+              @click="endGame"
+            >
+              End Game
+            </button>
+            <div>
             <span
               class="flex-grow level-text"
               :style="levelTextStyle"
             >Level: {{ levelIndex + 1 }} / {{ levels.length }}</span>
+            </div>
             <button
               v-if="showResetButton"
-              class="btn-primary"
+              class="btn-primary gameStarted-btn"
               @click="resetLevel"
               :style="{
                 visibility: gameEnded ? 'hidden':'visible',
@@ -499,6 +535,7 @@ input{
 import Game from "./Game";
 import Chip from "./Chip";
 import StakeRow from "./StakeRow";
+import VolumeIcon from "./VolumeIcon";
 import TxHistoryLink from "./TxHistoryLink";
 import { TweenLite } from "gsap/TweenMax";
 import Vue from "vue";
@@ -551,7 +588,8 @@ export default {
     Chip,
     StakeRow,
     TxHistoryLink,
-    Fireworks
+    Fireworks,
+    VolumeIcon
   },
   data() {
     return {

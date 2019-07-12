@@ -87,7 +87,11 @@ import {
   playBeginSound,
   playEndSound,
   playBackgroundMusic,
-  stopBackgroundMusic
+  stopBackgroundMusic,
+  volumeDown,
+  volumeUp,
+  muteOn,
+  muteOff,
 } from "../lib/sound";
 import { constants } from "fs";
 import { isAbsolute } from "path";

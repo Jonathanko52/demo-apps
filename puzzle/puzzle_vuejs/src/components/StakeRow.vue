@@ -56,6 +56,14 @@ footer {
   animation: shake 2s 20;
 }
 
+.start-btn:active {
+  animation: none;
+  transition: transform 0.1s;
+  transform: scale(0.9);
+  opacity: 0.5;
+
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
@@ -98,6 +106,7 @@ footer {
 .stake-buttons {
   background-color: #fff;
   border-radius: 0.3em;
+  margin-right: 1em;
 }
 .btn-mini {
   font-size: 1em;
@@ -111,9 +120,21 @@ footer {
   }
 }
 
+.btn-mini:active {
+  opacity: 0.5;
+  color: #ddd;
+  transition: transform 0.1s;
+  transform: scale(0.9)
+}
+
 .btn-primary {
   font-size: 1em;
   background-color: #1B295E;
+}
+
+.score-multiplier {
+  font-weight: bold;
+  margin-right: auto;
 }
 </style>
 
@@ -130,6 +151,10 @@ footer {
       <button class="btn-mini" @click="plus" :disabled="globalData.stake + 20 > globalData.balance">
         <font-awesome-icon icon="plus"></font-awesome-icon>
       </button>
+    </div>
+    <div class='score-multiplier'>
+      <font-awesome-icon icon="times"></font-awesome-icon>
+      {{globalData.stake/4}}
     </div>
     <button
       v-if="showPlayButton()"

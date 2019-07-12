@@ -103,13 +103,19 @@ html {
 }
 
 .logo {
-  margin: 1em auto;
+  margin: 2em auto;
   color: red;
   height: 2em;
   width: 2em;
   background-image: url(./assets/logo.svg);
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (max-height: 795px) {
+  .logo {
+    margin: 0em;
+  }
 }
 
 .flex-veritcal {
