@@ -9,6 +9,12 @@
   float: right;
 }
 
+.current-volume{
+  font-size: 2em;
+  color: white;
+  align-self: center;
+}
+
 .volume-panel{
     align-self:flex-end;
 }
@@ -79,14 +85,17 @@ export default {
         return{
         soundPlaying:true,
         optionsOpen: false,
+        curVolume: 10
         }
     },
     methods:{
         raiseVolume(){
-            raiseVolume()
+            this.curVolume = (raiseVolume() * 10).toFixed();
+            this.soundPlaying = true;
         },
         lowerVolume(){
-            lowerVolume()
+            this.curVolume = (lowerVolume() * 10).toFixed();
+            this.soundPlaying = true;
         },
         muteSound(){
             this.soundPlaying = false;
@@ -127,6 +136,9 @@ export default {
             <button class="btn-mini" @click="lowerVolume">
                 <font-awesome-icon icon="minus"></font-awesome-icon>
             </button>        
+            <div class='current-volume'>
+            {{curVolume}}
+            </div>
             <button class="btn-mini" @click="raiseVolume">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
             </button>
