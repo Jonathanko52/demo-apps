@@ -149,7 +149,6 @@ input{
 
 .action-row{
   justify-content:space-between;
-  margin-top:0.7em
 }
 
 .gameStarted-btn{

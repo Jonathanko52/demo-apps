@@ -6,7 +6,6 @@
   border: 0;
   color: white;
   outline: none;
-  float: right;
 }
 
 .current-volume{
@@ -31,12 +30,13 @@
 
 .sound-options-panel{
   position: fixed;
-  top: 0.5em;
+  top: 4em;
   right:0em;
   width: 100%;
-  padding: 1.5rem 3em;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 3rem 3em;
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius:1em;
+  z-index:10;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -49,18 +49,21 @@
 
 .options-items-wrapper{
   display: flex;
+  justify-content: space-between;
+}
+
+.option-item-buttons{
+  display: flex;
+  flex-direction:row;
   justify-content: center;
 }
 
-@media (max-width: 991.98px) {
-
-}
 
 // Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {
-  
-
-  
+@media (max-height: 767.98px) {
+      .btn-mini {
+        font-size: 1.5em;
+      }
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -129,25 +132,28 @@ export default {
         </button> 
     <transition name="fade">   
     <div v-if="optionsOpen" class="sound-options-panel">
-        <button v-if="optionsOpen" class="btn-mini" @click="closeOptions">
-             <font-awesome-icon icon="times"></font-awesome-icon>
-        </button>        
+    
         <div class="options-items-wrapper">
-            <button class="btn-mini" @click="lowerVolume">
-                <font-awesome-icon icon="minus"></font-awesome-icon>
-            </button>        
-            <div class='current-volume'>
-            {{curVolume}}
-            </div>
-            <button class="btn-mini" @click="raiseVolume">
-                <font-awesome-icon icon="plus"></font-awesome-icon>
-            </button>
             <button v-if="soundPlaying" class="btn-mini" @click="muteSound">
                 <font-awesome-icon icon="volume-mute" ></font-awesome-icon>
             </button>
             <button v-if="!soundPlaying" class="btn-mini" @click="unmuteSound">
-                <font-awesome-icon icon="volume-up"></font-awesome-icon>
+                    <font-awesome-icon icon="volume-up"></font-awesome-icon>
             </button>
+            <div class="option-item-buttons">
+                <button class="btn-mini" @click="lowerVolume">
+                    <font-awesome-icon icon="minus"></font-awesome-icon>
+                </button>        
+                <div class='current-volume'>
+                {{curVolume}}
+                </div>
+                <button class="btn-mini" @click="raiseVolume">
+                    <font-awesome-icon icon="plus"></font-awesome-icon>
+                </button>
+            </div>
+            <button v-if="optionsOpen" class="btn-mini" @click="closeOptions">
+                <font-awesome-icon icon="times"></font-awesome-icon>
+            </button>    
         </div>
     </div>
     </transition>
