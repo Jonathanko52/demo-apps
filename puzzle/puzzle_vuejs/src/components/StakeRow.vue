@@ -132,10 +132,6 @@ footer {
   background-color: #1B295E;
 }
 
-.score-multiplier {
-  font-weight: bold;
-  margin-right: auto;
-}
 </style>
 
 <template >
@@ -152,10 +148,7 @@ footer {
         <font-awesome-icon icon="plus"></font-awesome-icon>
       </button>
     </div>
-    <div class='score-multiplier'>
-      <font-awesome-icon icon="times"></font-awesome-icon>
-      {{globalData.stake/4}}
-    </div>
+
     <button
       v-if="showPlayButton()"
       class="btn-primary start-btn"
